@@ -1,4 +1,10 @@
+import 'dart:ffi';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:interview_flutter/BasicLayout.dart';
+
+import 'CodiumLoginPage.dart';
 
 void main() {
   runApp(MyApp());
@@ -9,36 +15,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Interview Problems for Flutter',
       theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // Try running your application with "flutter run". You'll see the
-        // application has a blue toolbar. Then, without quitting the app, try
-        // changing the primarySwatch below to Colors.green and then invoke
-        // "hot reload" (press "r" in the console where you ran "flutter run",
-        // or simply save your changes to "hot reload" in a Flutter IDE).
-        // Notice that the counter didn't reset back to zero; the application
-        // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Interview Problems for Flutter'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
   final String title;
 
   @override
@@ -46,68 +33,194 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
+  TextEditingController? _controller;
+  var number;
+  var n;
 
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
+  _printNumber({var num}) {
+    for (var i = 1; i <= num; i++) {
+      if (i % 3 == 0 && i % 5 == 0) {
+        print('FizzBuzz');
+      } else if (i % 3 == 0) {
+        print('Fizz');
+      } else if (i % 5 == 0) {
+        print('Buzz');
+      } else {
+        print(i);
+      }
+    }
+  }
+
+  _leapYear({int? num}) {
+    if (num! % 100 == 0) {
+      if (num % 400 == 0) {
+        print('$num -> true');
+      } else {
+        print('$num -> false');
+      }
+    } else {
+      if (num % 4 == 0) {
+        print('$num -> true');
+      } else {
+        print('$num -> false');
+      }
+    }
+  }
+
+  _no3point1({int? num}) {
+    print('n = $num');
+    for (var i = 0; i < num!; i++) {
+      List<String>? text = [];
+      for (var j = 1; j < num - i; j++) {
+        text.add(' ');
+      }
+      for (var j = 0; j <= i; j++) {
+        text.add('*');
+      }
+      print(text.join());
+    }
+  }
+
+  _no3point2({int? num}) {
+    print('n = $num');
+    for (var i = 1; i <= num!; i++) {
+      List<String>? text = [];
+      for (var j = 0; j < num; j++) {
+        if (j == (num - i)) {
+          text.add("*");
+        } else {
+          text.add(" ");
+        }
+      }
+      for (var j = (num - 1); j > 0; j--) {
+        if ((j - 1) == (num - i)) {
+          text.add("*");
+        } else {
+          text.add(" ");
+        }
+      }
+      print(text.join());
+    }
+  }
+
+  _no3point3({int? num}) {
+    print('n = $num');
+    for (var i = 1; i <= num!; i++) {
+      List<String>? text = [];
+      for (var j = 0; j < num; j++) {
+        if (j == (i - 1)) {
+          text.add("*");
+        } else if (j == (num - i)) {
+          text.add("*");
+        } else {
+          text.add(" ");
+        }
+      }
+      print(text.join());
+    }
+  }
+
+  _checkPrimeNumber({int? num}) {
+    List<int> listPrime = [];
+    for (var i = 2; i <= num!; i++) {
+      listPrime.add(i);
+    }
+    for (var i = 2; i <= num; i++) {
+      for (var j = 2; j < i; j++) {
+        if (i % j == 0) {
+          listPrime.remove(i);
+          break;
+        }
+      }
+    }
+    print('$num -> ${listPrime.join(" ")}');
+  }
+
+  @override
+  void initState() {
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-      appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
+        appBar: AppBar(
+          title: Text(widget.title),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
-    );
+        body: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              children: [
+                /// No.1
+                ElevatedButton(
+                    onPressed: () => _printNumber(num: 100),
+                    child: Text('Tap to print No.1')),
+
+                TextField(
+                  controller: _controller,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: 'Enter Year'),
+                  onChanged: (text) {
+                    if (text != '') {
+                      number = int.parse(text);
+                    }
+                  },
+                ),
+
+                /// No.2
+                ElevatedButton(
+                    onPressed: () => _leapYear(num: number),
+                    child: Text('Tap to print No.2 ')),
+
+                TextField(
+                  controller: _controller,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(), hintText: 'Enter number'),
+                  onChanged: (text) {
+                    if (text != '') {
+                      n = int.parse(text);
+                    }
+                  },
+                ),
+
+                /// No.3.1
+                ElevatedButton(
+                    onPressed: () => _no3point1(num: n ?? 0),
+                    child: Text('Tap to print No.3.1 ')),
+
+                /// No.3.2
+                ElevatedButton(
+                    onPressed: () => _no3point2(num: n ?? 0),
+                    child: Text('Tap to print No.3.2 ')),
+
+                /// No.3.3
+                ElevatedButton(
+                    onPressed: () => _no3point3(num: n ?? 0),
+                    child: Text('Tap to print No.3.3 ')),
+
+                /// No.4
+                ElevatedButton(
+                    onPressed: () => _checkPrimeNumber(num: n ?? 0),
+                    child: Text('Tap to print No.4')),
+
+                /// No.5
+                ElevatedButton(
+                    onPressed: () => Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => BasicLayout())),
+                    child: Text('Tap to Basic layout No.5')),
+
+                /// No.6
+                ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CodiumLoginPage())),
+                    child: Text('Tap to Codium Login page No.6')),
+              ],
+            ),
+          ),
+        ));
   }
 }
