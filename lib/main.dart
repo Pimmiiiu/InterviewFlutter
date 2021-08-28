@@ -2,9 +2,13 @@ import 'dart:ffi';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview_flutter/BasicLayout.dart';
 
+import 'Bloc/person_bloc.dart';
 import 'CodiumLoginPage.dart';
+import 'PersonPage.dart';
+import 'PersonPageMain.dart';
 
 void main() {
   runApp(MyApp());
@@ -218,6 +222,17 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(
                             builder: (context) => CodiumLoginPage())),
                     child: Text('Tap to Codium Login page No.6')),
+
+                /// No.7
+                ElevatedButton(
+                    onPressed: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => BlocProvider(
+                              create: (_) => PersonBloc(),
+                              child: PersonPageMain(),
+                            ))),
+                    child: Text('Tap to Person page No.7')),
               ],
             ),
           ),
