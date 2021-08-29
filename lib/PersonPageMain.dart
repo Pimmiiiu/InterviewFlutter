@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'Bloc/person_bloc.dart';
 import 'EditProfilePage.dart';
 import 'PersonPage.dart';
-import 'ProfileModel.dart';
 
 class PersonPageMain extends StatefulWidget {
   const PersonPageMain({Key? key}) : super(key: key);
@@ -16,6 +14,7 @@ class PersonPageMain extends StatefulWidget {
 class _PersonPageMainState extends State<PersonPageMain> {
 
   void initState() {
+    //start event GetPersonPage
     context.read<PersonBloc>().add(GetPersonPage([]));
     super.initState();
   }
@@ -23,6 +22,7 @@ class _PersonPageMainState extends State<PersonPageMain> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PersonBloc, PersonState>(builder: (context, state) {
+      // check state
       switch (state.status) {
         case PersonStatus.PersonPage:
           return PersonPage(

@@ -5,6 +5,7 @@ import 'ProfileModel.dart';
 
 class PersonPage extends StatefulWidget {
   final List<ProfileModel>? listProfile;
+
   const PersonPage({Key? key, this.listProfile}) : super(key: key);
 
   @override
@@ -12,6 +13,10 @@ class PersonPage extends StatefulWidget {
 }
 
 class _PersonPageState extends State<PersonPage> {
+  TextStyle textStyle = TextStyle(fontSize: 14, color: Colors.blueGrey[800]);
+  TextStyle titleTextStyle = TextStyle(
+      fontSize: 14, color: Colors.blueGrey[800], fontWeight: FontWeight.bold);
+
   @override
   void initState() {
     super.initState();
@@ -20,7 +25,13 @@ class _PersonPageState extends State<PersonPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Text(
+          'Person',
+          style: titleTextStyle,
+        ),
+      ),
       body: Column(
         children: [
           SizedBox(
@@ -35,13 +46,10 @@ class _PersonPageState extends State<PersonPage> {
                   name: widget.listProfile![index].name ?? '',
                   email: widget.listProfile![index].email ?? '',
                   address: widget.listProfile![index].address ?? '',
-                  photo: "",
-                  onTap: () async {
-                    print('profile : $index');
-                    context
-                        .read<PersonBloc>()
-                        .add(GetEditProfile(widget.listProfile![index],index));
-                  },
+                  photo: widget.listProfile![index].photo ?? '',
+                  onTap: () async => context
+                      .read<PersonBloc>()
+                      .add(GetEditProfile(widget.listProfile![index], index)), // change event to GetEditProfile
                 );
               }),
         ],
@@ -63,6 +71,9 @@ class PersonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TextStyle textStyle = TextStyle(fontSize: 14, color: Colors.blueGrey[300]);
+    TextStyle titleTextStyle = TextStyle(
+        fontSize: 14, color: Colors.blueGrey[800], fontWeight: FontWeight.bold);
     return InkWell(
       onTap: onTap,
       child: Card(
@@ -74,9 +85,8 @@ class PersonCard extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(left: 16, right: 8, top: 16, bottom: 16),
               child: CircleAvatar(
-                child: (photo == "")
-                    ? Text(name!.substring(0, 1))
-                    : Image.asset(photo!),
+                radius: 20,
+                backgroundImage: AssetImage(photo!),
               ),
             ),
             Expanded(
@@ -87,9 +97,12 @@ class PersonCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(name ?? ""),
-                    Text(email ?? ""),
-                    Text(address ?? ""),
+                    Text(
+                      name ?? "",
+                      style: titleTextStyle,
+                    ),
+                    Text(email ?? "", style: titleTextStyle),
+                    Text(address ?? "", style: textStyle),
                   ],
                 ),
               ),

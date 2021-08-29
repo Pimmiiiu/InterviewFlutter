@@ -1,13 +1,8 @@
-import 'dart:ffi';
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:interview_flutter/BasicLayout.dart';
-
 import 'Bloc/person_bloc.dart';
 import 'CodiumLoginPage.dart';
-import 'PersonPage.dart';
 import 'PersonPageMain.dart';
 
 void main() {
@@ -15,7 +10,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -37,9 +31,25 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  final buttonStyle = ButtonStyle(
+    backgroundColor: MaterialStateProperty.all(Colors.blueGrey),
+    elevation: MaterialStateProperty.all(0.0),
+    shape: MaterialStateProperty.all(
+      RoundedRectangleBorder(
+        side: BorderSide(
+          color: Color(0xff7D86A2),
+          width: 1,
+        ),
+        borderRadius: new BorderRadius.circular(30.0),
+      ),
+    ),
+  );
+
+  final textStyle = TextStyle(fontSize: 14, fontWeight: FontWeight.bold);
+
   TextEditingController? _controller;
+  var year;
   var number;
-  var n;
 
   _printNumber({var num}) {
     for (var i = 1; i <= num; i++) {
@@ -155,83 +165,124 @@ class _MyHomePageState extends State<MyHomePage> {
           child: SafeArea(
             child: Column(
               children: [
+                Text('No.1',style: textStyle,),
                 /// No.1
                 ElevatedButton(
                     onPressed: () => _printNumber(num: 100),
+                    style: buttonStyle,
                     child: Text('Tap to print No.1')),
 
-                TextField(
-                  controller: _controller,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'Enter Year'),
-                  onChanged: (text) {
-                    if (text != '') {
-                      number = int.parse(text);
-                    }
-                  },
+                Text('No.2',style: textStyle),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _controller,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.blueGrey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        hintText: 'Enter Year'),
+                    onChanged: (text) {
+                      if (text != '') {
+                        year = int.parse(text);
+                      }
+                    },
+                  ),
                 ),
-
                 /// No.2
                 ElevatedButton(
-                    onPressed: () => _leapYear(num: number),
+                    onPressed: () => _leapYear(num: year),
+                    style: buttonStyle,
                     child: Text('Tap to print No.2 ')),
 
-                TextField(
-                  controller: _controller,
-                  keyboardType: TextInputType.number,
-                  decoration: const InputDecoration(
-                      border: OutlineInputBorder(), hintText: 'Enter number'),
-                  onChanged: (text) {
-                    if (text != '') {
-                      n = int.parse(text);
-                    }
-                  },
+                Text('No.3 - No.4',style: textStyle),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextField(
+                    controller: _controller,
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                          borderSide: BorderSide(color: Colors.blueGrey),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(10)),
+                            borderSide: BorderSide(color: Colors.blueGrey)),
+                        hintText: 'Enter number'),
+                    onChanged: (text) {
+                      if (text != '') {
+                        number = int.parse(text);
+                      }
+                    },
+                  ),
                 ),
 
                 /// No.3.1
                 ElevatedButton(
-                    onPressed: () => _no3point1(num: n ?? 0),
+                    onPressed: () => _no3point1(num: number ?? 0),
+                    style: buttonStyle,
                     child: Text('Tap to print No.3.1 ')),
 
                 /// No.3.2
                 ElevatedButton(
-                    onPressed: () => _no3point2(num: n ?? 0),
+                    onPressed: () => _no3point2(num: number ?? 0),
+                    style: buttonStyle,
                     child: Text('Tap to print No.3.2 ')),
 
                 /// No.3.3
                 ElevatedButton(
-                    onPressed: () => _no3point3(num: n ?? 0),
+                    onPressed: () => _no3point3(num: number ?? 0),
+                    style: buttonStyle,
                     child: Text('Tap to print No.3.3 ')),
 
                 /// No.4
                 ElevatedButton(
-                    onPressed: () => _checkPrimeNumber(num: n ?? 0),
+                    onPressed: () => _checkPrimeNumber(num: number ?? 0),
+                    style: buttonStyle,
                     child: Text('Tap to print No.4')),
+
+                Text('No.5',style: textStyle),
 
                 /// No.5
                 ElevatedButton(
                     onPressed: () => Navigator.push(context,
                         MaterialPageRoute(builder: (context) => BasicLayout())),
+                    style: buttonStyle,
                     child: Text('Tap to Basic layout No.5')),
 
+                Text('No.6',style: textStyle),
                 /// No.6
                 ElevatedButton(
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => CodiumLoginPage())),
+                    style: buttonStyle,
                     child: Text('Tap to Codium Login page No.6')),
 
+                Text('No.7',style: textStyle),
                 /// No.7
                 ElevatedButton(
                     onPressed: () => Navigator.push(
                         context,
                         MaterialPageRoute(
                             builder: (context) => BlocProvider(
-                              create: (_) => PersonBloc(),
-                              child: PersonPageMain(),
-                            ))),
+                                  create: (_) => PersonBloc(),
+                                  child: PersonPageMain(),
+                                ))),
+                    style: buttonStyle,
                     child: Text('Tap to Person page No.7')),
               ],
             ),

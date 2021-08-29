@@ -3,7 +3,9 @@ part of 'person_bloc.dart';
 enum PersonStatus {
   //Idle state
   initialized,
+  //go to Person Page
   PersonPage,
+  //go to Edit Page
   EditPage
 }
 

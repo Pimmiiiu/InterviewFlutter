@@ -20,6 +20,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
   String? get email => widget.profile?.email;
   String? get address => widget.profile?.address;
   String? get dob => widget.profile?.dob;
+  String? get photo => widget.profile?.photo;
 
   String? newName = '';
   String? newEmail = '';
@@ -37,15 +38,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-
-    final photo = "";
-
     TextStyle textStyleError = TextStyle(fontSize: 14, color: Colors.red);
     TextStyle textStyle = TextStyle(fontSize: 14, color: Colors.blueGrey[800]);
     TextStyle titleTextStyle = TextStyle(
         fontSize: 14, color: Colors.blueGrey[800], fontWeight: FontWeight.bold);
-    TextStyle hintTextStyle =
-        TextStyle(fontSize: 14, color: Colors.blueGrey[200]);
 
     return Scaffold(
       appBar: AppBar(
@@ -61,7 +57,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
           onPressed: () async {
             ProfileModel profileData = ProfileModel(
-                name: name, email: email, address: address, dob: dob);
+                name: name, email: email, address: address, dob: dob ,photo: photo);
             context.read<PersonBloc>().add(SetNewProfile(profileData,widget.index));
           },
         ),
@@ -70,7 +66,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
               onPressed: () async => context.read<PersonBloc>().add(
                   SetNewProfile(
                       ProfileModel(
-                          name: newName, email: newEmail, address: newAddress, dob: newDob),
+                          name: newName, email: newEmail, address: newAddress, dob: newDob ,photo: photo),
                       widget.index ?? 1)),
               child: Text(
                 'Save',
@@ -83,10 +79,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
-              child: (photo == "")
-                  ? Text(name!.substring(0, 1))
-                  : Image.asset(photo),
+            Center(
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage(photo!),
+              ),
             ),
             SizedBox(
               height: 16,
@@ -99,8 +96,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               initialValue: name,
               onChanged: (text) {
                 newName = text;
-                print('newName : $newName');
-                setState(() {});
               },
               keyboardType: TextInputType.text,
               cursorColor: Colors.blueGrey,
@@ -135,7 +130,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               initialValue: email,
               onChanged: (text) {
                 newEmail = text;
-                setState(() {});
               },
               keyboardType: TextInputType.text,
               cursorColor: Colors.blueGrey,
@@ -170,7 +164,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               initialValue: dob,
               onChanged: (text) {
                 newDob = text;
-                setState(() {});
               },
               keyboardType: TextInputType.text,
               cursorColor: Colors.blueGrey,
@@ -205,7 +198,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
               initialValue: address,
               onChanged: (text) {
                 newAddress = text;
-                setState(() {});
               },
               keyboardType: TextInputType.text,
               cursorColor: Colors.blueGrey,

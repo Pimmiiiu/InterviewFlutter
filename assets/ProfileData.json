@@ -4,27 +4,31 @@
     "email": "athana@codium.co",
     "address":
     "Siam@siam Hotel Building, 7th Floor 865 Rama 1 Road Wang Pathumwan Bangkok 10330, Thailand",
-    "dob": "12/08/2021"
+    "dob": "12/08/2021",
+    "photo": "assets/PersonPhoto/avatar.png"
   },
   {
     "name": "John jan",
     "email": "jane.j@codium.co",
     "address":
     "Siam@siam Hotel Building, 7th Floor 865 Rama 1 Road Wang Pathumwan Bangkok 10330, Thailand",
-    "dob": "12/08/2021"
+    "dob": "12/08/2021",
+    "photo": "assets/PersonPhoto/avatar4.png"
   },
   {
     "name": "Ten",
     "email": "tem.t@codium.co",
     "address":
     "Siam@siam Hotel Building, 7th Floor 865 Rama 1 Road Wang Pathumwan Bangkok 10330, Thailand",
-    "dob": "12/08/2021"
+    "dob": "12/08/2021",
+    "photo": "assets/PersonPhoto/avatar3.png"
   },
   {
     "name": "Kai kai",
     "email": "kai.k@codium.co",
     "address":
     "Siam@siam Hotel Building, 7th Floor 865 Rama 1 Road Wang Pathumwan Bangkok 10330, Thailand",
-    "dob": "12/08/2021"
+    "dob": "12/08/2021",
+    "photo": "assets/PersonPhoto/avatar2.png"
   }
 ]
