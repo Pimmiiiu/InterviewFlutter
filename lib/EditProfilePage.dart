@@ -8,18 +8,23 @@ class EditProfilePage extends StatefulWidget {
   final int? index;
   final List<ProfileModel>? listProfile;
 
-  const EditProfilePage({Key? key, this.profile, required this.index, this.listProfile}) : super(key: key);
+  const EditProfilePage(
+      {Key? key, this.profile, required this.index, this.listProfile})
+      : super(key: key);
 
   @override
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
 class _EditProfilePageState extends State<EditProfilePage> {
-
   String? get name => widget.profile?.name;
+
   String? get email => widget.profile?.email;
+
   String? get address => widget.profile?.address;
+
   String? get dob => widget.profile?.dob;
+
   String? get photo => widget.profile?.photo;
 
   String? newName = '';
@@ -57,8 +62,14 @@ class _EditProfilePageState extends State<EditProfilePage> {
           ),
           onPressed: () async {
             ProfileModel profileData = ProfileModel(
-                name: name, email: email, address: address, dob: dob ,photo: photo);
-            context.read<PersonBloc>().add(SetNewProfile(profileData,widget.index));
+                name: name,
+                email: email,
+                address: address,
+                dob: dob,
+                photo: photo);
+            context
+                .read<PersonBloc>()
+                .add(SetNewProfile(profileData, widget.index));
           },
         ),
         actions: [
@@ -66,7 +77,11 @@ class _EditProfilePageState extends State<EditProfilePage> {
               onPressed: () async => context.read<PersonBloc>().add(
                   SetNewProfile(
                       ProfileModel(
-                          name: newName, email: newEmail, address: newAddress, dob: newDob ,photo: photo),
+                          name: newName,
+                          email: newEmail,
+                          address: newAddress,
+                          dob: newDob,
+                          photo: photo),
                       widget.index ?? 1)),
               child: Text(
                 'Save',
@@ -74,155 +89,159 @@ class _EditProfilePageState extends State<EditProfilePage> {
               ))
         ],
       ),
-      body: Padding(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage(photo!),
-              ),
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage(photo!),
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'Name',
+                  style: titleTextStyle,
+                ),
+                TextFormField(
+                  initialValue: name,
+                  onChanged: (text) {
+                    newName = text;
+                  },
+                  keyboardType: TextInputType.text,
+                  cursorColor: Colors.blueGrey,
+                  style: textStyle,
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    isCollapsed: true,
+                    fillColor: Colors.white,
+                    filled: true,
+                    errorStyle: textStyleError,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'E-mail',
+                  style: titleTextStyle,
+                ),
+                TextFormField(
+                  initialValue: email,
+                  onChanged: (text) {
+                    newEmail = text;
+                  },
+                  keyboardType: TextInputType.text,
+                  cursorColor: Colors.blueGrey,
+                  style: textStyle,
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    isCollapsed: true,
+                    fillColor: Colors.white,
+                    filled: true,
+                    errorStyle: textStyleError,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'Birth Date',
+                  style: titleTextStyle,
+                ),
+                TextFormField(
+                  initialValue: dob,
+                  onChanged: (text) {
+                    newDob = text;
+                  },
+                  keyboardType: TextInputType.text,
+                  cursorColor: Colors.blueGrey,
+                  style: textStyle,
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    isCollapsed: true,
+                    fillColor: Colors.white,
+                    filled: true,
+                    errorStyle: textStyleError,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                  ),
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+                Text(
+                  'Address',
+                  style: titleTextStyle,
+                ),
+                TextFormField(
+                  initialValue: address,
+                  onChanged: (text) {
+                    newAddress = text;
+                  },
+                  keyboardType: TextInputType.text,
+                  cursorColor: Colors.blueGrey,
+                  style: textStyle,
+                  maxLines: 4,
+                  textAlignVertical: TextAlignVertical.center,
+                  decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                    isCollapsed: true,
+                    fillColor: Colors.white,
+                    filled: true,
+                    errorStyle: textStyleError,
+                    enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        borderSide: BorderSide(color: Colors.blueGrey)),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Name',
-              style: titleTextStyle,
-            ),
-            TextFormField(
-              initialValue: name,
-              onChanged: (text) {
-                newName = text;
-              },
-              keyboardType: TextInputType.text,
-              cursorColor: Colors.blueGrey,
-              style: textStyle,
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                isCollapsed: true,
-                fillColor: Colors.white,
-                filled: true,
-                errorStyle: textStyleError,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              'E-mail',
-              style: titleTextStyle,
-            ),
-            TextFormField(
-              initialValue: email,
-              onChanged: (text) {
-                newEmail = text;
-              },
-              keyboardType: TextInputType.text,
-              cursorColor: Colors.blueGrey,
-              style: textStyle,
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                isCollapsed: true,
-                fillColor: Colors.white,
-                filled: true,
-                errorStyle: textStyleError,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Birth Date',
-              style: titleTextStyle,
-            ),
-            TextFormField(
-              initialValue: dob,
-              onChanged: (text) {
-                newDob = text;
-              },
-              keyboardType: TextInputType.text,
-              cursorColor: Colors.blueGrey,
-              style: textStyle,
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                isCollapsed: true,
-                fillColor: Colors.white,
-                filled: true,
-                errorStyle: textStyleError,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-              ),
-            ),
-            SizedBox(
-              height: 16,
-            ),
-            Text(
-              'Address',
-              style: titleTextStyle,
-            ),
-            TextFormField(
-              initialValue: address,
-              onChanged: (text) {
-                newAddress = text;
-              },
-              keyboardType: TextInputType.text,
-              cursorColor: Colors.blueGrey,
-              style: textStyle,
-              maxLines: 4,
-              textAlignVertical: TextAlignVertical.center,
-              decoration: InputDecoration(
-                contentPadding:
-                    EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                isCollapsed: true,
-                fillColor: Colors.white,
-                filled: true,
-                errorStyle: textStyleError,
-                enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-                focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(color: Colors.blueGrey)),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

@@ -32,27 +32,31 @@ class _PersonPageState extends State<PersonPage> {
           style: titleTextStyle,
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(
-            height: 8,
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 8,
+              ),
+              ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: widget.listProfile?.length ?? 0,
+                  itemBuilder: (context, index) {
+                    return PersonCard(
+                      name: widget.listProfile![index].name ?? '',
+                      email: widget.listProfile![index].email ?? '',
+                      address: widget.listProfile![index].address ?? '',
+                      photo: widget.listProfile![index].photo ?? '',
+                      onTap: () async => context.read<PersonBloc>().add(
+                          GetEditProfile(widget.listProfile![index],
+                              index)), // change event to GetEditProfile
+                    );
+                  }),
+            ],
           ),
-          ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: widget.listProfile?.length ?? 0,
-              itemBuilder: (context, index) {
-                return PersonCard(
-                  name: widget.listProfile![index].name ?? '',
-                  email: widget.listProfile![index].email ?? '',
-                  address: widget.listProfile![index].address ?? '',
-                  photo: widget.listProfile![index].photo ?? '',
-                  onTap: () async => context
-                      .read<PersonBloc>()
-                      .add(GetEditProfile(widget.listProfile![index], index)), // change event to GetEditProfile
-                );
-              }),
-        ],
+        ),
       ),
     );
   }
