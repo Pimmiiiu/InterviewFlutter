@@ -1,7 +1,5 @@
 # Interview Problems for Flutter. (Codium)
 
-## Solve (No.1 - 4 just make the function to show in the console - no need to make UI)
-
 #### No.1
 You can tap on the Button "Tap to print No.1" on the main page to print the answer. (print in console)
 
